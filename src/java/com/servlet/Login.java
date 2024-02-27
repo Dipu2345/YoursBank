@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpSession;
 import java.sql.*;
+import com.bank.user.UserDetails;
+
 
 
 public class Login extends HttpServlet {
@@ -61,11 +63,20 @@ public class Login extends HttpServlet {
               if(res.next()){
                   int user_id = res.getInt("user_id");
                   String name  = res.getString("user_name");
+                  String fname = res.getString("user_fname");
+                  long mob_no = res.getLong("user_mob");
+                  String gender = res.getString("gender");
+                  String email = res.getString("email");
+                  long addhar = res.getLong("addhar");
+                  String pan = res.getString("pan");
+                  String image = res.getString("image");
+                  int active_account = res.getInt("active_account");
                   System.out.println(user_id+" "+name);
                   HttpSession session = request.getSession();
                   session.setAttribute("id", user_id);
                   session.setAttribute("name", name);
-                  
+                 UserDetails u = new UserDetails(user_id,name, fname, mob_no, gender, email, addhar, pan,image,active_account);
+                  session.setAttribute("currentUser", u);
                  
                   out.println("<script>const Toast = Swal.mixin({\n" +
 "  toast: true,\n" +

@@ -247,7 +247,7 @@
                         <c:if test="${table.active_account==0}">
                         <div class="AccountNotActivated">
                             <h2>Account Not Activated!</h2>
-                            <h3> Please go to UPI section and Active Your Account</h3>
+                            <h3> Please go to Payment section and Active Your Account</h3>
                         </div>
                         </c:if>
                          <c:forEach  var="table1" items="${rese.rows}">   

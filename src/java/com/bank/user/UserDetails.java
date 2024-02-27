@@ -2,6 +2,7 @@
 package com.bank.user;
 
 public class UserDetails {
+    private int user_id;
     private String user_name;
     private String user_fname;
     private long user_mobile;
@@ -9,9 +10,10 @@ public class UserDetails {
     private String mail;
     private long addhar;
     private String pan;
+    private String image;
     private int active;
 
-    public UserDetails(String user_name, String user_fname, long user_mobile, String gender, String mail, long addhar, String pan,int active) {
+    public UserDetails(String user_name, String user_fname, long user_mobile, String gender, String mail, long addhar, String pan,String image,int active) {
         this.user_name = user_name;
         this.user_fname = user_fname;
         this.user_mobile = user_mobile;
@@ -19,8 +21,41 @@ public class UserDetails {
         this.mail = mail;
         this.addhar = addhar;
         this.pan = pan;
+        this.image=image;
         this.active=active;
     }
+
+    public UserDetails(int user_id, String user_name, String user_fname, long user_mobile, String gender, String mail, long addhar, String pan, String image,int active) {
+        this.user_id = user_id;
+        this.user_name = user_name;
+        this.user_fname = user_fname;
+        this.user_mobile = user_mobile;
+        this.gender = gender;
+        this.mail = mail;
+        this.addhar = addhar;
+        this.pan = pan;
+        this.image=image;
+        this.active = active;
+    }
+
+    public UserDetails(String user_name, String user_fname, long user_mobile, String gender, String mail, long addhar, String pan, int active) {
+        this.user_name = user_name;
+        this.user_fname = user_fname;
+        this.user_mobile = user_mobile;
+        this.gender = gender;
+        this.mail = mail;
+        this.addhar = addhar;
+        this.pan = pan;
+        this.active = active;
+    }
+    
+    public int getUser_id(){
+        return user_id;
+    }
+    public void setUser_id(int user_id){
+        this.user_id=user_id;
+    }
+    
 
     public int getActive() {
         return active;
@@ -84,6 +119,12 @@ public class UserDetails {
 
     public void setPan(String pan) {
         this.pan = pan;
+    }
+    public String getImage(){
+        return image;
+    }
+    public void setImage(String image){
+        this.image=image;
     }
     
 }

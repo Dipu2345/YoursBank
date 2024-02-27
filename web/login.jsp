@@ -1,8 +1,4 @@
-<%-- 
-    Document   : login
-    Created on : Dec 17, 2023, 7:45:21 PM
-    Author     : DEBASHIS
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page errorPage="error_page.jsp"%>

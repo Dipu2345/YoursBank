@@ -247,6 +247,12 @@
         #setimage{
             display: none;
         }
+        #ApplyAtmCard{
+            display: none;
+        }
+        #SetAtmPin{
+            display: none;
+        }
         
     </style>
 </head>
@@ -374,8 +380,8 @@
                         <hr>
                         <a style="text-decoration: none" href="./user_area/ActiveAccount.jsp"> <div class="account_all"><p>Active Account</p></div></a><hr>
                     <div class="account_all"><a href=""><i class="fa-solid fa-coins"></i>&nbsp;&nbsp;RBI Coin</a></div><hr>
-                    <div class="account_all"><a href=""><i class="fa-solid fa-globe"></i>&nbsp;&nbsp;Internet Banking</a></div><hr>
-                    <div class="account_all"><a href=""><i class="fa-regular fa-credit-card"></i>&nbsp;&nbsp;CARDS</a></div><hr>
+                    <div class="account_all"  onclick="setAtmPin()" ><p><i class="fa-solid fa-globe"></i>&nbsp;&nbsp;SET/CHANGE ATM PIN</p></div><hr>
+                    <div class="account_all" onclick="ApplayAtmCard()"><a href=""><i class="fa-regular fa-credit-card"></i>&nbsp;&nbsp;CARDS</a></div><hr>
                     </div>
                     <div class="account">
                         <div class="account_logo">
@@ -425,6 +431,12 @@
              <div id="changeImage">
                 <%@include file="user_area/ChangeImage.jsp" %>
             </div>
+            <div id="ApplyAtmCard">
+                <%@include file="user_area/ApplyForCard.jsp" %>
+            </div>
+             <div id="SetAtmPin">
+                <%@include file="user_area/setAtmPin.jsp" %>
+            </div>
 <!--            <div id="setimage">
                 
             </div>-->
@@ -443,7 +455,8 @@
             %>
             <script>
                 function accounntBalance(){
-                    console.log("hii");
+                     let dat = document.getElementById("SetAtmPin"); 
+                    dat.style.display="none";
                     let allDetails = document.getElementById("allDetails")
                     allDetails.style.display="none";
                     let addBalance = document.getElementById("addBalance");
@@ -451,13 +464,16 @@
                      let number =document.getElementById("mobile");
                     number.style.display="none";
                      let image =document.getElementById("changeImage");
-                    image.style.display="none";  
+                    image.style.display="none"; 
+                     let val = document.getElementById("ApplyAtmCard");
+                    val.style.display="none";
                    let account =document.getElementById("balance");
                    account.style.display="block";
                    console.log(account);
                 } 
                 function changePhoneNumber(){
-                    console.log("hhello");
+                     let dat = document.getElementById("SetAtmPin"); 
+                    dat.style.display="none";
                     let allDetails = document.getElementById("allDetails")
                     allDetails.style.display="none";
                     let addBalance = document.getElementById("addBalance");
@@ -465,13 +481,17 @@
                      let account =document.getElementById("balance");
                    account.style.display="none";
                     let image =document.getElementById("changeImage");
-                    image.style.display="none";  
+                    image.style.display="none"; 
+                     let val = document.getElementById("ApplyAtmCard");
+                    val.style.display="none";
                     let number =document.getElementById("mobile");
                     number.style.display="block";
                    
                     console.log(number);
                 }
                 function AddBalance(){
+                     let dat = document.getElementById("SetAtmPin"); 
+                    dat.style.display="none";
                     let allDetails = document.getElementById("allDetails")
                     allDetails.style.display="none";
                      let account =document.getElementById("balance");
@@ -479,11 +499,15 @@
                       let number =document.getElementById("mobile");
                     number.style.display="none";
                      let image =document.getElementById("changeImage");
-                    image.style.display="none";  
+                    image.style.display="none"; 
+                     let val = document.getElementById("ApplyAtmCard");
+                    val.style.display="none";
                     let addBalance = document.getElementById("addBalance");
                     addBalance.style.display="block";
                 }
                 function alldetails(){
+                     let dat = document.getElementById("SetAtmPin"); 
+                    dat.style.display="none";
                      let account =document.getElementById("balance");
                    account.style.display="none";
                     let number =document.getElementById("mobile");
@@ -491,22 +515,59 @@
                      let addBalance = document.getElementById("addBalance");
                     addBalance.style.display="none";
                      let image =document.getElementById("changeImage");
-                    image.style.display="none";  
-                    let allDetails = document.getElementById("allDetails")
+                    image.style.display="none"; 
+                     let val = document.getElementById("ApplyAtmCard");
+                    val.style.display="none";
+                    let allDetails = document.getElementById("allDetails");
                     allDetails.style.display="block";
                 }
                 function CImage(){
+                     let dat = document.getElementById("SetAtmPin"); 
+                    dat.style.display="none";
                      let account =document.getElementById("balance");
                    account.style.display="none";
                      let number =document.getElementById("mobile");
                     number.style.display="none";
                      let addBalance = document.getElementById("addBalance");
                     addBalance.style.display="none";
-                     let allDetails = document.getElementById("allDetails")
+                     let allDetails = document.getElementById("allDetails");
                     allDetails.style.display="none";
-                  
+                  let val = document.getElementById("ApplyAtmCard");
+                    val.style.display="none";
                     let image =document.getElementById("changeImage");
                     image.style.display="block";    
+                }
+                function  ApplayAtmCard(){
+                     let dat = document.getElementById("SetAtmPin"); 
+                    dat.style.display="none";
+                     let account =document.getElementById("balance");
+                   account.style.display="none";
+                     let number =document.getElementById("mobile");
+                    number.style.display="none";
+                     let addBalance = document.getElementById("addBalance");
+                    addBalance.style.display="none";
+                     let allDetails = document.getElementById("allDetails");
+                    allDetails.style.display="none";
+                     let image =document.getElementById("changeImage");
+                    image.style.display="none"; 
+                    let val = document.getElementById("ApplyAtmCard");
+                    val.style.display="block";
+                }
+                function setAtmPin(){
+                     let account =document.getElementById("balance");
+                   account.style.display="none";
+                     let number =document.getElementById("mobile");
+                    number.style.display="none";
+                     let addBalance = document.getElementById("addBalance");
+                    addBalance.style.display="none";
+                     let allDetails = document.getElementById("allDetails");
+                    allDetails.style.display="none";
+                     let image =document.getElementById("changeImage");
+                    image.style.display="none"; 
+                    let val = document.getElementById("ApplyAtmCard");
+                    val.style.display="none";
+                    let dat = document.getElementById("SetAtmPin"); 
+                    dat.style.display="block";
                 }
 //                function ActiveAccount(){
 //                     let allDetails = document.getElementById("allDetails")

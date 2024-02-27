@@ -304,9 +304,9 @@
                     flag = 1;
                 }
                 if (flag) {
-                    return true
+                    return true;
                 } else {
-                    return false
+                    return false;
                 }
 
             }
@@ -322,7 +322,7 @@
                     document.getElementById("f_name").style.borderBottom = "2px solid white";
                     document.getElementById("f_name").style.color = "white";
                     document.getElementById("fname_arror").innerHTML = ""
-                    flag = 1
+                    flag = 1;
                 }
                 if (flag) {
                     return true;
@@ -368,7 +368,7 @@
             }
             function valmail() {
                 let mail = document.getElementById("mail").value
-                let flag = 0
+                let flag = 0;
 
                 if (mail == "") {
                     document.getElementById("mail").style.borderBottom = "2px solid red";
@@ -436,6 +436,7 @@
          $("#main_form").on('submit',function(event){
             event.preventDefault();
             let form = new FormData(this);
+            console.log(form);
             $("#loader").show();
             $("#buttn").hide();
             $.ajax({
