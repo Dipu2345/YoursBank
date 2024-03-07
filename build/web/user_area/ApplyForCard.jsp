@@ -4,7 +4,7 @@
 <%@page import="com.bank.helper.ActivityDao" %>
 <%@page import="com.bank.user.AtmDetails" %>
 <%
-
+try{
 UserDetails use =(UserDetails) session.getAttribute("currentUser");
 
 if(use==null){
@@ -363,9 +363,10 @@ response.sendRedirect("../login.jsp");
           
           String atmno = String.valueOf(atm_det.getAtm_no());
           int dgt =0;
-          String one = "";
+//          out.println(atmno);
+          String one ="";
           String two ="";
-          String three = "";
+          String three ="";
           for(int i=0;i<=3;i++){
           one+=atmno.charAt(dgt);
           dgt++;
@@ -473,7 +474,12 @@ response.sendRedirect("../login.jsp");
                             <h2>Account Not Activated!</h2>
                             <h3> Please go to UPI section and Active Your Account</h3>
                         </div>
-              <%}%>
+              <%}
+}catch(Throwable e){
+e.printStackTrace();
+out.println(e);
+}
+              %>
                     
            
                         <script>
@@ -507,7 +513,7 @@ response.sendRedirect("../login.jsp");
 //        alert("hii"); 
         let str = "";
         
-        for(let i=1;i<=13;i++){
+        for(let i=1;i<=12;i++){
             let char =Math.trunc(Math.random()*9);
             str+=char;
         }

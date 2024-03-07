@@ -39,7 +39,7 @@ try{
             }
             .set_pin_left{
                 width: 40%;
-                height: 300px;
+                height: 360px;
                 z-index: 3;
                 position: relative;
                 /*right: -468px;*/
@@ -67,14 +67,14 @@ try{
                 background-color: #e2e2e2;
             }
             .form_for_set_pin{
-/*                padding: 30px 20px;*/
+                /*                padding: 30px 20px;*/
                 display: flex;
                 width: 47%;
-                height: 300px;
+                height: 360px;
                 align-items: center;
                 justify-content: center;
                 flex-direction: column;
-                gap: 38px;
+                gap: 20px;
                 background: #e2e2e2;
                 box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
             }
@@ -83,6 +83,8 @@ try{
                 width: 70%;
                 flex-direction: column;
                 gap: 6px;
+                /*                align-items: baseline;
+                                justify-content: center;*/
             }
             .form_inside input{
                 padding: 10px 20px;
@@ -315,16 +317,89 @@ try{
                 box-shadow: #3c4fe0 0 3px 7px inset;
                 transform: translateY(2px);
             }
+            .Account_not_activted{
+                width: 50%;
+                text-align: center;
+                position: relative;
+                top: 100px;
+                left: 200px;
+            }
+            .Account_not_activted h1{
+                color: red;
+                font-family: monospace;
+                font-size: 14px;
+                animation: text_clr infinite ease-in-out 2.5s;
+                position: relative;
+                top: 100px;
+            }
+            .sendOTPBTn{
+                background: #0e53e19e;
+                padding: 4px 10px;
+                color: white;
+                border-radius: 8px;
+                text-align: center;
+                width: 30%;
+                transition: transform 2s;
+
+            }
+            .sendOTPBTn:hover{
+                transform: scale(1.1);
+                cursor: pointer;
+                background: blue;
+            }
+            .variryOtmBtn{
+                background: #0e53e19e;
+                padding: 4px 10px;
+                color: white;
+                border-radius: 8px;
+                text-align: center;
+                width: 30%;
+                transition: transform 2s;
+            }
+            .variryOtmBtn:hover{
+            transform: scale(1.1);
+            cursor: pointer;
+            background: blue;
+            }
+            @keyframes text_clr{
+                0%{
+                    color:black;
+                }
+                25%{
+                    color:red;
+                    transform: scale(1.5);
+                }
+                50%{
+                    color:black;
+                    transform:scale(1,1);
+                }
+                75%{
+                    color:red;
+                    transform: scale(1.5);
+                }
+
+                100%{
+                    color:black;
+                    transform:scale(1,1);
+                }
+            }
+            .not_active{
+                position: relative;
+                top: 350px;
+            }
         </style>
     </head>
     <body class="full">
         <%
-        if(dl==null){
-        out.println("please apply for atm first");
-            }
+        if(dl==null){%>
+        <div class="Account_not_activted not_active" >
+            <h1>GoTo-> CARDS section Apply For Card... </h1>
+        </div>
+
+        <%    }
             else{
         %>
-       
+
 
         <div class="head_data_for_atm">
             <div class="left_for_atm">
@@ -353,32 +428,51 @@ try{
             <form action="changeOldAtmPin" class="form_for_set_pin form_p1"  id="changepin">
                 <div class="form_inside">
                     <label>Enter Card Number</label>
-                    <input type="number" name="card_number_changed_pin" placeholder="Enter Card Number"  >
+                    <input type="number" name="card_number_changed_pin" placeholder="Enter Card Number" value="<%=dl.getAtm_no()%>" >
                 </div>
                 <div class="form_inside">
+                    <label id="verify_email">Verify Email</label>
+                    <input id="inp_fro_email" type="email" name="Oto_to_send_email" placeholder="Enter Email" readonly value="<%= use1.getMail()%>" >
+                    <input id="inp_for_verify" type="number" name="verify_otp" placeholder="Enter OTP"  >
+                    <b id="sendOtp" class="sendOTPBTn">Send OTP</b>
+                    <span><i id="loaderforotp" class="fa-solid fa-circle-notch fa-rotate-180 fa-2x fa-spin"  style="color: #0ced45;"></i></span>
+                    <p id="verifydOtp" class="variryOtmBtn" >Verify OTP</p>
+                </div>
+
+                <div class="form_inside">
                     <label>Enter New Pin</label>
-                    <input type="number" name="card_pin_changed_pin"  placeholder="Enter four Digit Pin" >
+                    <input  id="new_atm_pin"  type="number" name="card_pin_changed_pin"  placeholder="Enter four Digit Pin" >
+                    <b id="inpt_error">.Four Digit PIN</b>
                 </div>
                 <div class="form_inside_button">
-                   
-                    <button class="button-29" role="button">Set pin</button>
+
+                    <button class="button-29" id="change_btn" role="button">Change pin</button>
                 </div>
             </form>
             <form action="SetAtmPinServlet" class="form_for_set_pin form_p" id="sub_form"  >
+                <%
+                boolean result_for_atmpin = atm_dao.CheckAtmPinSetOrNot(dl.getAtm_no());
+               
+                if(result_for_atmpin)
+                {
+                out.println("PIN Already Seted....<br><b>If Yoy Forgot PIN</b><hr><br>Please Change Your PIN");
+                }else{
+                %>
                 <div class="form_inside">
                     <label>Enter Card Number</label>
                     <input type="number" name="card_number" placeholder="Enter Card Number"  value="<%=dl.getAtm_no()%>">
                 </div>
                 <div class="form_inside">
-                    <label>Set PIN</label>
+                    <label> PIN</label>
                     <input type="number" name="card_pin"  placeholder="Enter 4 digit pin" >
                 </div>
                 <div class="form_inside_button">
-                   
-                    <button class="button-29" role="button">Change Pin</button>
+                    <!--<h1>this is set pin</h1>-->
+                    <button class="button-29" role="button">SET PIN</button>
 
 
                 </div>
+                <%} %>
             </form>
         </div>
 
@@ -386,16 +480,13 @@ try{
 
 
         <%} %>
-        
-        <%
-         
-            
-         
+
+        <%  
      }catch(Throwable e){
          out.println(e);
      }
         %>
-
+`
 
 
 
@@ -427,7 +518,14 @@ try{
         crossorigin="anonymous"></script>
         <script>
             $(document).ready(function () {
+                $("#inpt_error").hide();
+                $("#loaderforotp").hide();
+                $("#change_btn").hide();
+                $("#inp_for_verify").hide();
+//                $("#sendOtp").hide();
+                $("#verifydOtp").hide();
                 $("#loader").hide();
+                //submit form for set pin 
                 $("#sub_form").on('submit', function (ele_atm) {
 
                     ele_atm.preventDefault();
@@ -460,34 +558,124 @@ try{
 
                     });
                 });
-                $("#changepin").on('submit',function (change_atm){
+
+                //code for change pin 
+                $("#changepin").on('submit', function (change_atm) {
                     change_atm.preventDefault();
-                   let change_data =$(this).serialize();
-                    console.log(change_data);
+                     let frm_data = $("#new_atm_pin").val();
+                     if(frm_data.length<=4){
+                    let change_data = $(this).serialize();
                     $.ajax({
                         url: "changeOldAtmPin",
                         type: 'POST',
                         data: change_data,
                         success: function (data, textStatus, jqXHR) {
-                        console.log(data);
-                        if(data.trim()==="success"){
-                              swal("Pin Updated Successfully ...")
+                            if (data.trim() === "success") {
+                                swal("Pin Updated Successfully ...")
                                         .then((value) => {
                                             window.location = "profile.jsp";
                                         });
+                            } else {
+                                swal(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log("error");
                         }
-                        else{
-                            swal(data);
-                        }
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.log("error");
-                    }
                     });
+                     }
+                     else{
+                          $("#inpt_error").show();
+                         $("#inpt_error").css("color","red");
+                         $("#inpt_error").html("Four Digit Pin Allowed");
+                     }
                 });
+                //code for input email
+                $("#inp_fro_email").on('keyup', function (n) {
+                    let val = $("#inp_fro_email").val();
+                    if (val.length != 0 && val.charAt(0) != "@" && val.charAt(val.length - 4) == ".")
+                    {
+                        $("#sendOtp").show();
+                    } else {
+                        $("#sendOtp").hide();
+                    }
 
+                });
+                //code for send otp 
+                $("#sendOtp").on('click', function (m) {
+                    $("#loaderforotp").show();
+                    $("#sendOtp").hide();
+                    let dt = $("#inp_fro_email").val();
+                    let type1 = "sendotp";
+                    $.ajax({
+                        url: "OTPSendForAtmPinChange",
+                        type: 'POST',
+                        data: {type: type1},
+                        success: function (data, textStatus, jqXHR) {
+                            console.log(data);
+                            if (data.trim() === "send") {
+                                $("#loaderforotp").hide();
+                                $("#sendOtp").hide();
+                                $("#inp_fro_email").hide();
+                                $("#sendOtp").hide();
+                                $("#inp_for_verify").show();
+                                $("#verifydOtp").show();
+                                swal("OTP Sent");
+                            } else {
+                                swal("Sorry For Inconvience Please Try Again");
+                                $("#loaderforotp").hide();
+                                $("#sendOtp").show();
+                            }
+//                        $("#sendOtp").hide();
+//                        $("#verifydOtp").show();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log("error");
+                        }
+
+
+                    });
+
+                });
+                //code for verify otp
+                $("#verifydOtp").on('click', function (m) {
+                    let dt = $("#inp_fro_email").val();
+                    let type1 = "verifyotp";
+                    let otp = $("#inp_for_verify").val();
+
+                    $.ajax({
+                        url: "OTPSendForAtmPinChange",
+                        type: 'POST',
+                        data: {type: type1, otpis: otp},
+                        success: function (data, textStatus, jqXHR) {
+                            console.log(data);
+                            $("#sendOtp").hide();
+                            $("#verifydOtp").hide();
+                            if (data.trim() === "otpisVerified") {
+                                $("#verify_email").html("Verified...");
+                                swal("Verificition Successful...");
+                                $("#change_btn").show();
+                            } else if (data.trim() === "OTPNOTVERIFIED") {
+                                swal("Wrong OTP Entered");
+                                $("#verifydOtp").show();
+                            }
+                            else{
+                                swal("Server Error Please Try After Some Time");
+                                  $("#verifydOtp").show();
+                            }
+
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log("error");
+                        }
+
+
+                    });
+
+
+                });
+                
             });
-
 
         </script>
 

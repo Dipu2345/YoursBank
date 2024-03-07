@@ -4,14 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/DEBASHIS/OneDrive/Documents/NetBeansProjects/Banks/web/index.jsp</file>
+            <file>file:/C:/Users/DEBASHIS/OneDrive/Documents/NetBeansProjects/Banks/web/login.jsp</file>
             <file>file:/C:/Users/DEBASHIS/OneDrive/Documents/NetBeansProjects/Banks/src/java/com/servlet/changeOldAtmPin.java</file>
+            <file>file:/C:/Users/DEBASHIS/OneDrive/Documents/NetBeansProjects/Banks/web/user_area/ApplyForCard.jsp</file>
+            <file>file:/C:/Users/DEBASHIS/OneDrive/Documents/NetBeansProjects/Banks/src/java/com/bank/user/AtmDetails.java</file>
             <file>file:/C:/Users/DEBASHIS/OneDrive/Documents/NetBeansProjects/Banks/web/main.jsp</file>
-            <file>file:/C:/Users/DEBASHIS/OneDrive/Documents/NetBeansProjects/Banks/src/java/com/servlet/SetAtmPinServlet.java</file>
-            <file>file:/C:/Users/DEBASHIS/OneDrive/Documents/NetBeansProjects/Banks/web/user_area/checkAccountBalance.jsp</file>
-            <file>file:/C:/Users/DEBASHIS/OneDrive/Documents/NetBeansProjects/Banks/src/java/com/bank/helper/ActivityDao.java</file>
+            <file>file:/C:/Users/DEBASHIS/OneDrive/Documents/NetBeansProjects/Banks/src/java/com/servlet/SaveUserDetails.java</file>
             <file>file:/C:/Users/DEBASHIS/OneDrive/Documents/NetBeansProjects/Banks/web/user_area/setAtmPin.jsp</file>
-            <file>file:/C:/Users/DEBASHIS/OneDrive/Documents/NetBeansProjects/Banks/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/DEBASHIS/OneDrive/Documents/NetBeansProjects/Banks/web/profile.jsp</file>
+            <file>file:/C:/Users/DEBASHIS/OneDrive/Documents/NetBeansProjects/Banks/web/user_area/changeSecretPin.jsp</file>
+            <file>file:/C:/Users/DEBASHIS/OneDrive/Documents/NetBeansProjects/Banks/src/java/com/servlet/OTPSendForAtmPinChange.java</file>
+            <file>file:/C:/Users/DEBASHIS/OneDrive/Documents/NetBeansProjects/Banks/src/java/com/servlet/ApplyForAtm.java</file>
         </group>
     </open-files>
 </project-private>

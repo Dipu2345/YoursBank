@@ -1,7 +1,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page session="true" %>
+<%@page errorPage="error_page.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -253,6 +255,102 @@
         #SetAtmPin{
             display: none;
         }
+        .res_logo{
+            display: none;
+        }
+        @media only  screen and (max-width:600px){
+            body{
+              background: #13a8e1;
+              /*width: 107%;*/
+            }
+/*            .profiles{
+                height: 600px;
+            }*/
+            .left_side_profile {
+               width: 103%;
+               /*height: 300px;*/
+            }
+            .profile_details {
+                flex-direction: column;
+                height: 300px;
+            }
+            .right_side{
+                width: 91%;
+                    position: absolute;
+                 top: 238px;
+
+            }
+            .acco {
+                    position: relative;
+                     left: -427px;
+                     z-index:99;
+                     top: -80px;
+            }
+            .profile_image {
+                width: 100%;
+                height: 100px;
+                position: relative;
+                top: -108px;
+                background: #e2e2e2;
+
+                display: flex;
+                align-content: center;
+                justify-content: space-evenly;
+                    
+            }
+            .res_logo{
+                display: flex;
+                width: 20%;
+                justify-content: center;
+            }
+            .control_nav{
+                
+            }
+            .control_nav1{
+                display: none;
+            }
+            .logo {
+                font-size: 12px;
+            }
+            .logo h3 {
+                font-size: 18px;
+            }
+            .helpline {
+                font-size: 13px;
+                margin-top: -37px;
+            }
+            .first_img {
+                background-position: 0 0 ;
+            }
+            
+            .first_logo {
+                height: 71px;
+            }
+            .first_img1 {
+                height: 137px;
+                margin-top: 0;
+                top: -15px;
+            }
+            header{
+                position: sticky;
+                top: 0;
+                z-index: 99;
+                background: red;
+                height: 118px;
+            }
+            /*////firsst navigation responsive*/
+            .inside_nav {
+                width: 100%;
+                
+            }
+            .inside_nav ul li {
+                font-size: 10px;
+            }
+            .profile_back {
+                height: 71px;
+            }
+            
+        }
         
     </style>
 </head>
@@ -347,6 +445,10 @@
                          <%}%>
                      </h5>
                  </div>
+                     <div class="res_logo">
+                         <span class="control_nav" onclick="getLeftNav()"><i class="fa fa-bars fa-2x"></i></span>
+                           <span class="control_nav1" onclick="hideLeftNav()"><i class="fa fa-close fa-2x"></i></span>
+                     </div>
 
             </div>
             <div class="acco">
@@ -447,7 +549,9 @@
             <%
                 }
             catch(Throwable r){
+           System.out.println(r);
             out.println(r);
+            r.printStackTrace();
             out.println("<script>alert('Session Timeout Please LOgin');</script>");
 
                         }
@@ -585,5 +689,46 @@
 //                    id.style.display="block";
 //                }
             </script>       
+            
+            <script>
+              function   getLeftNav(){
+                 let tr = document.getElementsByClassName("acco");
+                 tr[0].style.transition="2s";
+                 tr[0].style.left="0px";
+                 let do1 = document.getElementsByClassName("control_nav");
+                 do1[0].style.display="none";
+                 let do2 = document.getElementsByClassName("control_nav1");
+                 do2[0].style.display="block";
+                 
+              }
+              
+             function hideLeftNav(){
+                  let tr = document.getElementsByClassName("acco");
+                 tr[0].style.transition="2s";
+                 tr[0].style.left="-420px";
+                  let do1 = document.getElementsByClassName("control_nav");
+                 do1[0].style.display="block";
+                 let do2 = document.getElementsByClassName("control_nav1");
+                 do2[0].style.display="none";
+             }
+             
+             let full_terget = document.getElementsByClassName("account_all");
+             console.log(full_terget);
+             let ele =Array.from(full_terget);
+             ele.forEach((btn)=>{
+                btn.addEventListener('click',(val)=>{
+                  let tr = document.getElementsByClassName("acco");
+                 tr[0].style.transition="1s";
+                 tr[0].style.left="-420px";
+                  let do1 = document.getElementsByClassName("control_nav");
+                 do1[0].style.display="block";
+                 let do2 = document.getElementsByClassName("control_nav1");
+                 do2[0].style.display="none";
+                    
+                });
+             });
+          
+             
+            </script>
 </body>
 </html>

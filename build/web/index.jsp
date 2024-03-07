@@ -15,7 +15,7 @@
             }
 
             body{
-                background-image: url("./image/money-7881948.jpg");
+                /*background-image: url("./image/money-7881948.jpg");*/
             }
             .main{
                 width: 100%;
@@ -41,6 +41,7 @@
                 justify-content: center;
                 border-radius: 10px;
                 backdrop-filter: blur(2px);
+                background: #0947fb47;
             }
             .sec{
                 margin: 30px 20px;
@@ -77,7 +78,7 @@
                 font-weight: bold;
             }
             .main_form{
-                width: 67%;
+                width: 95%;
 
 
             }
@@ -102,7 +103,7 @@
                 border: none;
                 border-radius: 10px;
                 cursor: pointer;
-                background-color:rgba(169, 143, 15, 0.628) ;
+               background-color: rgb(255 212 0 / 63%);
                 padding: 10px;
             }
             button:hover{
@@ -117,6 +118,20 @@
             .chg_wdth:focus{
                 border: none;
 
+            }
+            @media only  screen and (max-width:600px){
+                .main {
+                    width: 113%;
+                    height: 1000px;
+/*                      background-image: url("");*/
+                      background-size: 0;
+                }
+                form {
+                    padding: 0;
+                }
+                .main_form{
+                        height: 615px;
+                }
             }
         </style>
     </head>
@@ -436,7 +451,7 @@
          $("#main_form").on('submit',function(event){
             event.preventDefault();
             let form = new FormData(this);
-            console.log(form);
+            
             $("#loader").show();
             $("#buttn").hide();
             $.ajax({
@@ -444,13 +459,21 @@
                type: 'POST',
                data: form,
                success: function (data, textStatus, jqXHR) {
-                        console.log(data);
-                        swal("Registred Sucessfully ...We Are Redirecting You TO Login Page")
+                       
+                        if(data.trim()==="done"){
+                        swal("Registred Sucessfully ...We Are Redirecting You To Login Page")
                                 .then((value) => {
                                   window.location='login.jsp';
                             $("#loader").hide();
                              $("#buttn").show();
-});
+                         
+                            });
+                            }
+                         else{
+                             swal(data);
+                              $("#loader").hide();
+                             $("#buttn").show();
+                         }
                     },
                error: function (jqXHR, textStatus, errorThrown) {
                         console.log(jqXHR);

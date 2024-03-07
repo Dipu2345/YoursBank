@@ -16,16 +16,26 @@
                     background-repeat: no-repeat;
                     background-position: center;
                     background-size: 6%;
-                    height: 100vh;
+                    height: 400%;
                     width: 100%;
                     z-index: 100;
                     position: fixed;
+            }
+            #offline{
+                width: 100%;
+                height: 400%;
+                background: gray;
+                z-index: 99;
+                color: red;
+                display: none;
+                position: absolute;
             }
             
             
         </style>
     </head>
     <body> 
+        <div  id="offline"  class="offline"><img  width="100%" height="100%" src="./image/nointernet.gif" alt="alt"/></div>
         <div id="preloader"></div>
         <div class="main">
             <div class="visme_d" data-title="Untitled Project" data-url="eprmy79m-untitled-project?fullPage=true" data-domain="forms" data-full-page="true" data-min-height="100vh" data-form-id="18021"></div>
@@ -81,7 +91,7 @@
                                     <li><a href="">LOANS</a></li>
                                     <li><a href="">INVESTMENT</a></li>
                                     <li><a href="">DIGITAL PRODUCTS</a></li>
-                                    <li><a href="index.html">REGISTER</a></li>
+                                    <li><a href="index.jsp">REGISTER</a></li>
                                     <li><a href="">NRI BANKING</a></li>
 
                                 </ul>
@@ -162,26 +172,26 @@
                 <div class="inside_offer">
 
                     <div class="offer1">
-                        <div class="offer_left"></div>
+                        <a href="https://www.goibibo.com/flights/"  class="offer_left"></a>
                         <div class="offer_right">
                             <div class="marks">
                                 <h3><i class="fa-solid fa-bell"></i>&nbsp;&nbsp;updates And Announcement</h3>
                             </div>
-                            <marquee direction="up"  height="80%">
+                            <marquee direction="up"  height="80%" onmouseover="this.stop()" onmouseout="this.start()" >
 
                                 <div class="mark1">
                                     <br>
-                                    <p>Update teksdnjbjhc cvhdsvj dvdhuv</p>
+                                    <p>We Are Going To Start Our Service Soon...</p>
                                     <br>
                                     <br>
                                     <hr class="hr_tag">
                                     <br>
-                                    <p>Update teksdnjbjhc cvhdsvj dvdhuv</p>
+                                    <p>Go to open account section and Start your journey with us...</p>
                                     <br>
                                     <br>
                                     <hr class="hr_tag">
                                     <br>
-                                    <p>Update teksdnjbjhc cvhdsvj dvdhuv</p>
+                                    <p>Be our early costumer </p>
                                     <br>
                                     <a href="#" class="marq_anc">Know More</a>
                                     <br>
@@ -281,10 +291,34 @@
             
         </div>
                             <script>
+                                //code for preloader
                                 let loader = document.getElementById("preloader");
                                 window.addEventListener('load',function(){
                                     loader.style.display="none";
                                 });
+                                
+                                let target_elem = document.getElementById("offline");
+                                
+                                let wlv= setInterval(function(){
+                                    if(window.navigator.onLine===true){
+                                    target_elem.style.display="none";
+                                    console.log("online");
+                                }
+                                else{
+                                    target_elem.style.display="block";
+                                    console.log("offline");
+                                }
+                                },2000);
+                                
+                                if(window.navigator.onLine===true){
+                                    target_elem.style.display="none";
+                                    console.log("online");
+                                }
+                                else{
+                                    target_elem.style.display="block";
+                                    console.log("offline");
+                                }
+                                //code for online and offline 
                                 
                                 
                             </script>

@@ -1,11 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package com.servlet;
 
 import com.bank.user.UserDetails;
 import com.bank.Connector.DbConnect;
+import com.bank.helper.ActivityDao;
 import com.bank.helper.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,20 +21,27 @@ public class SaveUserDetails extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             try{
-                Thread.sleep(4000);
+                Thread.sleep(2000);
             }
             catch(Throwable r){
                 r.printStackTrace();
             }
+            String email = request.getParameter("user_mail");
+            ActivityDao ad = new ActivityDao(DbConnect.getConnect());
+            boolean b1 = ad.isEmailPresentForForgotUsername(email);
+            if(b1){
+                out.println("Email Already Present");
+            }
+            else{
                 String name = request.getParameter("user_name");
                 String father_name = request.getParameter("user_fname");
                 long user_mob = Long.parseLong(request.getParameter("user_mobnumber"));
                 String gender = request.getParameter("user_gender");
-                String email = request.getParameter("user_mail");
+                
                 long user_addhar = Long.parseLong(request.getParameter("user_addhar"));
                 String user_pan = request.getParameter("user_pan");
                 int active = 0;
-
+                
                 UserDetails details = new UserDetails(name, father_name, user_mob, gender, email, user_addhar, user_pan, active);
 
                 UserDao use_ref = new UserDao(DbConnect.getConnect());
@@ -46,7 +51,7 @@ public class SaveUserDetails extends HttpServlet {
                     out.println("error");
                 }
            
-
+            }
         }
     }
 

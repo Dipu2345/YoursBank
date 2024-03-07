@@ -21,33 +21,7 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Login</title>");    
-            out.println("<script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@11\"></script>");
-            out.println("""
-                        <style>
-                        .division{
-                            display:flex;
-                            justify-content:center;
-                            position:absolute;
-                            top:30px;
-                        flex-direction:column;
-                        left:500px;
-                        
-                        }
-                        a{
-                        text-decoration:none;
-                        text-align:center;
-                        
-                        }
-                        
-                        </style>
-                        """);
-            out.println("</head>");
-            out.println("<body>");
+        
             String user_name  = request.getParameter("name");
             long user_mob = Long.parseLong(request.getParameter("mob"));
             
@@ -77,51 +51,20 @@ public class Login extends HttpServlet {
                   session.setAttribute("name", name);
                  UserDetails u = new UserDetails(user_id,name, fname, mob_no, gender, email, addhar, pan,image,active_account);
                   session.setAttribute("currentUser", u);
-                 
-                  out.println("<script>const Toast = Swal.mixin({\n" +
-"  toast: true,\n" +
-"  position: \"top-end\",\n" +
-"  showConfirmButton: false,\n" +
-"  timer: 3000,\n" +
-"  timerProgressBar: true,\n" +
-"  didOpen: (toast) => {\n" +
-"    toast.onmouseenter = Swal.stopTimer;\n" +
-"    toast.onmouseleave = Swal.resumeTimer;\n" +
-"  }\n" +
-"});\n" +
-"Toast.fire({\n" +
-"  icon: \"success\",\n" +
-"  title: \"Signed in successfully\"\n" +
-"});</script>");
-//          RequestDispatcher rs  =request.getRequestDispatcher("main.html");
-//          rs.forward(request, response);
-            out.println("<div class='division'>");
-             out.println("<p>if you are  not redirect automatically click below</p>");
-             out.println("<h2><a href='main.jsp'>Click Here </a></h2>");
-             out.println("</div>");
+              
              String type = "user";
              HttpSession sson = request.getSession();
              sson.setAttribute("type",type);
+             out.println("success");
               }
               else{
-                  out.println("""
-                              <script>Swal.fire({
-                                icon: "error",
-                                title: "Oops...",
-                                text: "Invalid credential !",
-                                footer: '<a href="./login.jsp"> Click Here To Login Again</a>'
-                              });</script>""");
+                  out.println("error");
               }
-                
+              
             }
             catch(Exception e){
                 out.println("error ");
             }
-            
-
-            
-            out.println("</body>");
-            out.println("</html>");
         }
     }
 

@@ -88,11 +88,13 @@ public class AddBalance extends HttpServlet {
                         """);
             out.println("</head>");
                out.println("<body>");
+              
+                try{
           long db_amount=0; 
           String name="";
           long amount= Long.parseLong(request.getParameter("amount"));
           int pin  = Integer.parseInt(request.getParameter("pin"));
-          try{
+         
               
           
           Class.forName("com.mysql.cj.jdbc.Driver");

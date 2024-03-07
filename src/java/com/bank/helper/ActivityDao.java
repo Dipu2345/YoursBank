@@ -2,6 +2,7 @@
 package com.bank.helper;
 
 import com.bank.user.AtmDetails;
+import com.bank.user.UserDetails;
 import java.sql.*;
 public class ActivityDao {
     
@@ -10,9 +11,8 @@ public class ActivityDao {
        
             this.con=con;
         
-    }
-    
-    
+    }   
+    //code to get account no by user id
     public long getAccountNumber(int user_id){
         long ac_no=0;
         try {
@@ -30,6 +30,7 @@ public class ActivityDao {
         return ac_no;
     }
     
+    //code to apply for atm card by all details 
     public boolean applyAtmCard(int user_id,long ac_no,long atm_no,int cvv){
         boolean b=false;
         try {
@@ -47,6 +48,7 @@ public class ActivityDao {
         return b;
     }
     
+    //code to check atm applied or not 
     public boolean checkAtmAppliedOrNot(int user_id){
         boolean b=false;
         try {
@@ -62,7 +64,7 @@ public class ActivityDao {
         }
         return b;
     }
-    
+    //code to get all atm details by taking userid
     public AtmDetails getAtmDetails(int user_id){
         AtmDetails atm_details=null;
         try {
@@ -86,7 +88,7 @@ public class ActivityDao {
         return atm_details;
         
     }
-    
+    //code to check account is activated or not
     public boolean checkAccountActivated(int user_id){
         boolean b=false;
         try {
@@ -109,7 +111,7 @@ public class ActivityDao {
         
         return b;
     }
-    
+    //code to set atm pin
     public boolean setAtmpin(long atm_no,int atm_pin){
         boolean b= false;
         try {
@@ -128,13 +130,93 @@ public class ActivityDao {
         }
         return b;
     }
-//    public boolean changeAtmPin(long atm_no , int atm_pin){
-//        boolean b = false;
-//        try {
-//            String s = "update "
+    public boolean CheckAtmPinSetOrNot(long atm_no){
+        boolean b = false;
+        int data=0;
+        try {
+            String s  = "select atm_pin from atm_details  where atm_no = ?  ";
+            PreparedStatement ps = con.prepareStatement(s);
+            ps.setLong(1, atm_no);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                data = rs.getInt("atm_pin");
+            }
+            if(data!=1){
+                b=true;
+            }
+        } catch (Exception e) {
+        }
+        return b;
+    }
+    //code to check email is present for forgot username change
+    public boolean isEmailPresentForForgotUsername(String email){
+        boolean b = false;
+        try {
+            String s = "select * from users where email=?";
+            PreparedStatement ps = con.prepareStatement(s);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+           while(rs.next()){
+               b=true;
+           }
+        } catch (Exception e) {
+        }
+        return b;
+    }
+    
+    //code to update username for forgot username
+    
+    public boolean UpdateUserName(String email,String newUserName){
+        boolean b = false;   
+        try {
+            String s = "update users set user_name=? where email=?";
+            PreparedStatement ps = con.prepareStatement(s);
+            ps.setString(1, newUserName);
+            ps.setString(2, email);
+            ps.executeUpdate();
+            b=true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return b;
+    }
+    //code to get username for sending to user in forgot id
+    public String getUserNameByEmail(String email){
+        String user =null;
+        try {
+            String s = "select * from users where email =?";
+            PreparedStatement ps = con.prepareStatement(s);
+            ps.setString(1,email);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                user=rs.getString("user_name");
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+    
+    //code for checking mali id is present or not during account creating
+    
+//    public boolean checkEmailidPresentOrNot(String email){
+//            boolean b=false;
+//        
+//            try {
+//            String qr = "select * from users where email = ?";
+//            PreparedStatement ps = con.prepareStatement(qr);
+//            ps.setString(1, email);
+//            ResultSet res = ps.executeQuery();
+//            while(res.next()){
+//                b=true;
+//            }
 //        } catch (Exception e) {
+//            e.printStackTrace();
 //        }
-//        return b;
+//            return b;
 //    }
+    
+    
 }
 

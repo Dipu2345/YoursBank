@@ -1,8 +1,4 @@
-<%-- 
-    Document   : error_page
-    Created on : Dec 19, 2023, 11:45:28 AM
-    Author     : DEBASHIS
---%>
+
 <%@page isErrorPage="true" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

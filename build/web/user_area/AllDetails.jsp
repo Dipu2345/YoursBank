@@ -166,6 +166,38 @@
             .AccountNotActivated h2{
                 margin-bottom: 15px;
             }
+            @media only  screen and (max-width:600px){
+                .main{
+                    flex-direction: column;
+                }
+                .left {
+                    width: 96%;
+                    height: 100px;
+                }
+                .inside_left {
+                    width: 53px;
+                }
+                
+                .left div {
+                    margin: 0;
+                }
+                .right {
+                    width: 100%;
+                       position: relative;
+    top: -23px;
+                }
+                
+                .inn1_felx {
+                    height: 110px;
+                }
+                .in1_right_div{
+                    height: 58px;
+                    /*overflow: hidden;*/
+                }
+                .arrow {
+                    display: none;
+                }
+            }
         </style>
     </head>
     <body> 

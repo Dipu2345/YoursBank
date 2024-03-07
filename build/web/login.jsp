@@ -142,6 +142,45 @@
         .icns i:hover{
             cursor: pointer;
         }
+        .forgot_password{
+            font-size: 12px;
+            font-family: monospace;
+            text-decoration: none;
+            transition: 5s;
+        }
+        .forgot_password:hover{
+            text-decoration: underline;
+        }
+        @media only  screen and (max-width:600px){
+            .main_login {
+                flex-direction: column;
+                height: 860px;
+                
+            }
+            .left_login {
+                    width: 77%;
+                     height: 563px;
+                     display: none;
+                     height: 100%;
+            }
+            .right_login {
+             position: relative;
+    width: 100%;
+    top: 73px;
+            }
+            .login {
+                  width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+            }
+            form{
+                width: 87%;
+            }
+            .main_login{
+                width: 108%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -151,18 +190,19 @@
         </div>
         <div class="right_login">
             <div class="login">
-                <form action="Login">
+                <form action="Login" id="form_for_login">
                     <p class="hdr">Yours Bank</p>
                     <div class="inpt">
                         <label for=""><i class="fa-regular fa-user"></i></label>
-                        <input type="text" placeholder="Enter User name" name="name">
+                        <input type="text" placeholder="Enter User name" name="name" required>
                     </div>
                     <div class="inpt">
                         <label for=""><i class="fa-solid fa-key"></i></label>
-                        <input type="password" placeholder="Enter your Mobile no" name="mob">
+                        <input type="password" placeholder="Enter your Mobile no" name="mob" required>
                     </div>
-                    <div class="inpt btn ">
+                    <div class="inpt btn " style="display: flex;align-items: center;justify-content: center;flex-direction: column;height: 52px;gap: 10px">
                       <button>Login</button>
+                      <a class="forgot_password" href="forgotPassword.jsp">Forgot Username?</a>
                     </div>
                     <div class="social_login">
                         <div class="icns">
@@ -181,5 +221,38 @@
 
         </div>
     </div>
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function(){
+                $("#form_for_login").on('submit',function(event){
+                    event.preventDefault();
+                    let data_login = $(this).serialize();
+                    $.ajax({
+                       url: "Login",
+                       type: 'POST',
+                       data: data_login,
+                       success: function (data, textStatus, jqXHR) {
+                        console.log(data);
+                        if(data.trim()==="success"){
+                            swal("Login Successful")
+                                        .then((val)=>{
+                                            window.location='main.jsp';
+                                });
+                        }
+                        else{
+                            swal("Invalid Credential");
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log("error");
+                    }
+                    });
+                });
+            });
+        </script>
 </body>
 </html>
